@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { navItems } from '../nav-items';
 import { Link } from 'react-router-dom';
+import { mockAnnouncements, mockCourses, mockUserProgress } from '../mockData';
 
 const Home = () => {
   return (
@@ -30,7 +31,15 @@ const Home = () => {
                   <CardTitle>Latest News</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p>Recent announcements and updates will be displayed here.</p>
+                  <ul className="space-y-2">
+                    {mockAnnouncements.map(announcement => (
+                      <li key={announcement.id}>
+                        <h3 className="font-semibold">{announcement.title}</h3>
+                        <p className="text-sm text-gray-600">{announcement.content}</p>
+                        <p className="text-xs text-gray-400">{announcement.date}</p>
+                      </li>
+                    ))}
+                  </ul>
                 </CardContent>
               </Card>
               <Card>
@@ -38,7 +47,14 @@ const Home = () => {
                   <CardTitle>Enrolled Courses</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p>Your enrolled courses will be listed here.</p>
+                  <ul className="space-y-2">
+                    {mockCourses.slice(0, 3).map(course => (
+                      <li key={course.id}>
+                        <h3 className="font-semibold">{course.title}</h3>
+                        <p className="text-sm text-gray-600">{course.instructor}</p>
+                      </li>
+                    ))}
+                  </ul>
                 </CardContent>
               </Card>
               <Card>
@@ -46,7 +62,18 @@ const Home = () => {
                   <CardTitle>Learning Progress</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p>Your learning progress summary will be shown here.</p>
+                  <ul className="space-y-2">
+                    {mockUserProgress.map(progress => {
+                      const course = mockCourses.find(c => c.id === progress.courseId);
+                      return (
+                        <li key={progress.courseId}>
+                          <h3 className="font-semibold">{course.title}</h3>
+                          <p className="text-sm text-gray-600">Progress: {progress.progress}%</p>
+                          <p className="text-xs text-gray-400">Last accessed: {progress.lastAccessed}</p>
+                        </li>
+                      );
+                    })}
+                  </ul>
                 </CardContent>
               </Card>
             </div>

@@ -1,6 +1,33 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Button } from "@/components/ui/button"
+import { mockAssessments, mockReports } from '../mockData';
+
+const AssessmentCard = ({ assessment }) => (
+  <Card className="mb-4">
+    <CardHeader>
+      <CardTitle>{assessment.title}</CardTitle>
+      <CardDescription>{assessment.type}</CardDescription>
+    </CardHeader>
+    <CardContent>
+      <p>Due Date: {assessment.dueDate}</p>
+      <Button className="mt-2">Start Assessment</Button>
+    </CardContent>
+  </Card>
+);
+
+const ReportCard = ({ report }) => (
+  <Card className="mb-4">
+    <CardHeader>
+      <CardTitle>{report.title}</CardTitle>
+    </CardHeader>
+    <CardContent>
+      <p>Generated on: {report.generatedDate}</p>
+      <Button className="mt-2">View Report</Button>
+    </CardContent>
+  </Card>
+);
 
 const AssessmentsReports = () => {
   return (
@@ -19,11 +46,38 @@ const AssessmentsReports = () => {
               <CardDescription>View and take your assessments</CardDescription>
             </CardHeader>
             <CardContent>
-              {/* Add assessment listing component here */}
+              {mockAssessments.map(assessment => (
+                <AssessmentCard key={assessment.id} assessment={assessment} />
+              ))}
             </CardContent>
           </Card>
         </TabsContent>
-        {/* Add other TabsContent for knowledge tests and reports */}
+        <TabsContent value="knowledge-tests">
+          <Card>
+            <CardHeader>
+              <CardTitle>Knowledge Tests</CardTitle>
+              <CardDescription>Test your knowledge on various topics</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {mockAssessments.filter(a => a.type === 'Quiz').map(assessment => (
+                <AssessmentCard key={assessment.id} assessment={assessment} />
+              ))}
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="reports">
+          <Card>
+            <CardHeader>
+              <CardTitle>Learning Reports</CardTitle>
+              <CardDescription>View your learning progress reports</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {mockReports.map(report => (
+                <ReportCard key={report.id} report={report} />
+              ))}
+            </CardContent>
+          </Card>
+        </TabsContent>
       </Tabs>
     </div>
   );
