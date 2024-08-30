@@ -23,3 +23,29 @@ export const mockReports = [
   { id: 1, title: "Q1 Learning Progress Report", generatedDate: "2024-03-31" },
   { id: 2, title: "Skills Gap Analysis", generatedDate: "2024-04-05" },
 ];
+
+export const mockLessons = [
+  { id: 1, title: "Introduction to Project Management", courseId: 1, duration: "45 minutes", completed: true },
+  { id: 2, title: "Project Lifecycle", courseId: 1, duration: "60 minutes", completed: false },
+  { id: 3, title: "Excel Basics", courseId: 2, duration: "30 minutes", completed: true },
+  { id: 4, title: "Advanced Formulas", courseId: 2, duration: "90 minutes", completed: false },
+];
+
+export const mockUserProfile = {
+  id: 1,
+  name: "John Doe",
+  email: "john.doe@example.com",
+  role: "Student",
+  joinDate: "2024-01-15",
+};
+
+export const mockCreatedCourses = [
+  { id: 1, title: "Introduction to Data Science", students: 150, rating: 4.7 },
+  { id: 2, title: "Web Development Fundamentals", students: 200, rating: 4.5 },
+];
+
+export const mockAISearchResults = [
+  { id: 1, title: "Project Management Best Practices", type: "Document", relevance: 0.95 },
+  { id: 2, title: "Agile Methodology Overview", type: "Course", relevance: 0.88 },
+  { id: 3, title: "Team Leadership Skills", type: "Video", relevance: 0.75 },
+];
