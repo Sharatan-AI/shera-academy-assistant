@@ -1,5 +1,5 @@
 import { HomeIcon, BookOpenIcon, GraduationCapIcon, ClipboardCheckIcon, UsersIcon, FolderPlusIcon, BrainCircuitIcon } from "lucide-react";
-import Home from "./pages/Home.jsx";
+import Home from "./pages/Index.jsx";
 import Courses from "./pages/Courses.jsx";
 import Learning from "./pages/Learning.jsx";
 import AssessmentsReports from "./pages/AssessmentsReports.jsx";
