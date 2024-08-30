@@ -3,7 +3,10 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { navItems } from '../nav-items';
 import { Link } from 'react-router-dom';
-import { mockAnnouncements, mockCourses, mockUserProgress } from '../mockData';
+import { mockAnnouncements, mockCourses, mockUserProgress, mockCourseCompletionData, mockUserEngagementData, mockSkillProgressData } from '../mockData';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
+
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 const Home = () => {
   return (
@@ -25,7 +28,67 @@ const Home = () => {
             <CardDescription>Welcome to SHERA Academy</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Course Completions</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ResponsiveContainer width="100%" height={300}>
+                    <BarChart data={mockCourseCompletionData}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="name" />
+                      <YAxis />
+                      <Tooltip />
+                      <Legend />
+                      <Bar dataKey="completions" fill="#8884d8" />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <CardTitle>User Engagement</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ResponsiveContainer width="100%" height={300}>
+                    <PieChart>
+                      <Pie
+                        data={mockUserEngagementData}
+                        cx="50%"
+                        cy="50%"
+                        labelLine={false}
+                        outerRadius={80}
+                        fill="#8884d8"
+                        dataKey="value"
+                      >
+                        {mockUserEngagementData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                        ))}
+                      </Pie>
+                      <Tooltip />
+                      <Legend />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <CardTitle>Skill Progress</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ResponsiveContainer width="100%" height={300}>
+                    <RadarChart cx="50%" cy="50%" outerRadius="80%" data={mockSkillProgressData}>
+                      <PolarGrid />
+                      <PolarAngleAxis dataKey="subject" />
+                      <PolarRadiusAxis angle={30} domain={[0, 150]} />
+                      <Radar name="Student" dataKey="A" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+                      <Radar name="Average" dataKey="B" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6} />
+                      <Legend />
+                    </RadarChart>
+                  </ResponsiveContainer>
+                </CardContent>
+              </Card>
               <Card>
                 <CardHeader>
                   <CardTitle>Latest News</CardTitle>
@@ -39,40 +102,6 @@ const Home = () => {
                         <p className="text-xs text-gray-400">{announcement.date}</p>
                       </li>
                     ))}
-                  </ul>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Enrolled Courses</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2">
-                    {mockCourses.slice(0, 3).map(course => (
-                      <li key={course.id}>
-                        <h3 className="font-semibold">{course.title}</h3>
-                        <p className="text-sm text-gray-600">{course.instructor}</p>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Learning Progress</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2">
-                    {mockUserProgress.map(progress => {
-                      const course = mockCourses.find(c => c.id === progress.courseId);
-                      return (
-                        <li key={progress.courseId}>
-                          <h3 className="font-semibold">{course.title}</h3>
-                          <p className="text-sm text-gray-600">Progress: {progress.progress}%</p>
-                          <p className="text-xs text-gray-400">Last accessed: {progress.lastAccessed}</p>
-                        </li>
-                      );
-                    })}
                   </ul>
                 </CardContent>
               </Card>

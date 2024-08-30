@@ -49,3 +49,29 @@ export const mockAISearchResults = [
   { id: 2, title: "Agile Methodology Overview", type: "Course", relevance: 0.88 },
   { id: 3, title: "Team Leadership Skills", type: "Video", relevance: 0.75 },
 ];
+
+export const mockCourseCompletionData = [
+  { name: 'Jan', completions: 65 },
+  { name: 'Feb', completions: 59 },
+  { name: 'Mar', completions: 80 },
+  { name: 'Apr', completions: 81 },
+  { name: 'May', completions: 56 },
+  { name: 'Jun', completions: 55 },
+  { name: 'Jul', completions: 40 },
+];
+
+export const mockUserEngagementData = [
+  { name: 'Videos', value: 400 },
+  { name: 'Quizzes', value: 300 },
+  { name: 'Assignments', value: 200 },
+  { name: 'Discussions', value: 100 },
+];
+
+export const mockSkillProgressData = [
+  { subject: 'Project Management', A: 120, B: 110, fullMark: 150 },
+  { subject: 'Communication', A: 98, B: 130, fullMark: 150 },
+  { subject: 'Technical Skills', A: 86, B: 130, fullMark: 150 },
+  { subject: 'Leadership', A: 99, B: 100, fullMark: 150 },
+  { subject: 'Problem Solving', A: 85, B: 90, fullMark: 150 },
+  { subject: 'Time Management', A: 65, B: 85, fullMark: 150 },
+];
